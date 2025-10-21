@@ -1,332 +1,291 @@
-# JavaLab2 - Отчёт по лабораторной работе №2
+```markdown
+<h1>Лабораторная работа №2</h1>
+<h2>
+  <p>Конов Михаил</p>
+  <p>7 группа</p>
+  <p>2 вариант</p>
+</h2>
 
-<h2> Общая информация</h2>
-<p><strong>Автор:</strong> Конов Михаил ПР-7<br>
-<strong>Предмет:</strong> Программирование на Java<br>
-<strong>Лабораторная работа:</strong> №2<br>
-<strong>Вариант:</strong> 2</p>
+<p>Для проверки ввода был создан класс Validation</p>
+<h2>Класс Validation</h2>
+<p>Класс <code>Validation</code> предназначен для обработки и валидации пользовательского ввода через консоль.</p>
 
-<hr>
+<h2>Структура класса</h2>
+<p>Класс содержит только статические методы для валидации различных типов данных.</p>
 
-<h2> Задание 1. Базовые сущности</h2>
+<h3>Статические методы</h3>
 
-<h3> Задача 2,3. Человек и Имена</h3>
-
-<p><strong>Реализованные классы:</strong></p>
+<h4>getInputString(Scanner scanner, String prompt)</h4>
 <ul>
-<li><code>Person</code> - сущность Человек</li>
-<li><code>Name</code> - сущность Имя</li>
+    <li><strong>Назначение:</strong> Ввод и валидация строковых значений</li>
+    <li><strong>Параметры:</strong>
+        <ul>
+            <li><code>scanner</code> - объект Scanner для чтения ввода</li>
+            <li><code>prompt</code> - сообщение для пользователя</li>
+        </ul>
+    </li>
+    <li><strong>Возвращает:</strong> Валидную строку</li>
+    <li><strong>Особенности:</strong>
+        <ul>
+            <li>Проверяет, что строка не пустая</li>
+            <li>Проверяет, что строка содержит только буквы</li>
+            <li>Проверяет, что первая буква заглавная, остальные строчные</li>
+        </ul>
+    </li>
 </ul>
 
-<p><strong>Класс Person:</strong></p>
-```java
-public class Person {
-    private Name name;
-    private int height;
-    
-    // Конструкторы
-    public Person(Name name, int height) {
-        this.name = name;
-        this.height = height;
-    }
-    
-    public Person(String firstName, int height) {
-        this(new Name(firstName), height);
-    }
-    
-    // Геттеры и сеттеры
-    public Name getName() { return name; }
-    public int getHeight() { return height; }
-    
-    @Override
-    public String toString() {
-        return "Имя: " + name.toString() + ", рост: " + height + " см";
-    }
-}
-<p><strong>Класс Name:</strong></p> ```java public class Name { private String lastName; private String firstName; private String middleName;
-text
-// Конструкторы для разных комбинаций параметров
-public Name(String firstName) {
-    this(null, firstName, null);
-}
-
-public Name(String lastName, String firstName) {
-    this(lastName, firstName, null);
-}
-
-public Name(String lastName, String firstName, String middleName) {
-    this.lastName = lastName;
-    this.firstName = firstName;
-    this.middleName = middleName;
-}
-
-@Override
-public String toString() {
-    StringBuilder result = new StringBuilder();
-    if (lastName != null) result.append(lastName).append(" ");
-    if (firstName != null) result.append(firstName).append(" ");
-    if (middleName != null) result.append(middleName);
-    return result.toString().trim();
-}
-}
-
-text
-
-<p><strong>Созданные объекты:</strong></p>
+<h4>getInputInt(Scanner scanner, String prompt, int min, int max)</h4>
 <ul>
-<li>Человек с Именем "Клеопатра" и ростом 152</li>
-<li>Человек с Именем "Пушкин Александр Сергеевич" и ростом 167</li>
-<li>Человек с Именем "Маяковский Владимир" и ростом 189</li>
+    <li><strong>Назначение:</strong> Ввод и валидация целых чисел в заданном диапазоне</li>
+    <li><strong>Параметры:</strong>
+        <ul>
+            <li><code>scanner</code> - объект Scanner для чтения ввода</li>
+            <li><code>prompt</code> - сообщение для пользователя</li>
+            <li><code>min</code> - минимальное допустимое значение</li>
+            <li><code>max</code> - максимальное допустимое значение</li>
+        </ul>
+    </li>
+    <li><strong>Возвращает:</strong> Валидное целое число в заданном диапазоне</li>
+    <li><strong>Особенности:</strong>
+        <ul>
+            <li>Проверяет тип данных и диапазон значений</li>
+            <li>Обрабатывает некорректный ввод с выводом сообщения об ошибке</li>
+        </ul>
+    </li>
 </ul>
 
-<hr>
-
-<h2> Задание 2. Композиция объектов</h2>
-
-<h3> Задача 2. Человек с именем</h3>
-
-<p><strong>Объединение сущностей:</strong></p>
+<h4>isValidCityName(String name)</h4>
 <ul>
-<li>Класс <code>Person</code> теперь использует <code>Name</code> вместо строки</li>
-<li>Реализована проверка ввода данных</li>
-<li>Добавлены методы для интерактивного создания объектов</li>
+    <li><strong>Назначение:</strong> Проверка названия города</li>
+    <li><strong>Параметры:</strong> <code>name</code> - название для проверки</li>
+    <li><strong>Возвращает:</strong> true если название валидно</li>
+    <li><strong>Особенности:</strong>
+        <ul>
+            <li>Проверяет, что название - одна заглавная латинская буква</li>
+        </ul>
+    </li>
 </ul>
 
-<p><strong>Метод создания человека из ввода:</strong></p>
-```java
-public static Person createFromInput(Scanner scanner) {
-    Name name = Name.createFromInput(scanner);
-    int height = Validation.getInputInt(scanner, "Введите рост (см): ", 1, 300);
-    return new Person(name, height);
-}
-<p><strong>Результат объединения:</strong></p> <ul> <li>Человек с Именем Клеопатра и ростом 152</li> <li>Человек с Именем Пушкин Александр Сергеевич и ростом 167</li> <li>Человек с Именем Маяковский Владимир и ростом 189</li> </ul><h3> Задача 3. Человек с родителем</h3><p><strong>Расширенный класс Person:</strong></p> ```java public class Person { private Name name; private int height; private Person father; // Добавлен отец
-text
-// Конструкторы
-public Person(Name name, int height, Person father) {
-    this.name = name;
-    this.height = height;
-    this.father = father;
-    inheritFromFather();
-}
-
-// Наследование фамилии и отчества от отца
-private void inheritFromFather() {
-    if (father != null) {
-        Name fatherName = father.getName();
-        // Наследование фамилии
-        if (!name.hasLastName() && fatherName.hasLastName()) {
-            name.setLastName(fatherName.getLastName());
-        }
-        // Наследование отчества
-        if (!name.hasMiddleName() && fatherName.hasFirstName()) {
-            name.setMiddleName(fatherName.getFirstName() + "ович");
-        }
-    }
-}
-}
-
-text
-
-<p><strong>Созданные объекты:</strong></p>
+<h4>isCityNameUnique(String name, List<City> cities)</h4>
 <ul>
-<li>Чудов Иван (без отца)</li>
-<li>Чудов Пётр (отец - Иван)</li>
-<li>Чудов Борис (отец - Пётр)</li>
+    <li><strong>Назначение:</strong> Проверка уникальности названия города</li>
+    <li><strong>Параметры:</strong>
+        <ul>
+            <li><code>name</code> - название для проверки</li>
+            <li><code>cities</code> - список существующих городов</li>
+        </ul>
+    </li>
+    <li><strong>Возвращает:</strong> true если название уникально</li>
 </ul>
 
-<p><strong>Автоматическое наследование:</strong></p>
+<h2>Пример использования</h2>
+<pre><code>Scanner scanner = new Scanner(System.in);
+String name = Validation.getInputString(scanner, "Введите имя: ");
+int height = Validation.getInputInt(scanner, "Введите рост: ", 1, 300);</code></pre>
+
+<h2>Задание 1.2: Человек</h2>
+<h3>Условие</h3>
+<p>Создать сущность <strong>Человек</strong>, которая описывается именем и ростом. Человек должен возвращать текстовое представление вида <code>"Name, рост: height"</code>. Необходимо создать и вывести на экран следующих людей:</p>
 <ul>
-<li>Пётр наследует фамилию "Чудов" от Ивана</li>
-<li>Борис наследует фамилию "Чудов" и отчество "Петрович" от Петра</li>
+    <li>Человек с именем "Клеопатра" и ростом 152</li>
+    <li>Человек с именем "Пушкин" и ростом 167</li>
+    <li>Человек с именем "Владимир" и ростом 189</li>
 </ul>
 
-<hr>
-
-<h2> Задание 3. Коллекции и агрегация</h2>
-
-<h3> Задача 3. Города</h3>
-
-<p><strong>Класс City:</strong></p>
-```java
-public class City {
-    private String name;
-    private Map<City, Integer> routes; // Город -> стоимость поездки
-    
-    public City(String name) {
-        this.name = name;
-        this.routes = new HashMap<>();
-    }
-    
-    // Добавление пути к другому городу
-    public void addRoute(City city, int cost) {
-        routes.put(city, cost);
-    }
-    
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("Город: ").append(name);
-        if (!routes.isEmpty()) {
-            sb.append("\nСвязанные города:");
-            for (Map.Entry<City, Integer> entry : routes.entrySet()) {
-                sb.append("\n  - ").append(entry.getKey().getName())
-                  .append(": ").append(entry.getValue());
-            }
-        }
-        return sb.toString();
-    }
-}
-<p><strong>Созданная схема городов:</strong></p> ``` Город: A Связанные города: - C: 10 - B: 5
-Город: B
-Связанные города:
-
-A: 5
-
-E: 8
-
-D: 3
-
-Город: C
-Связанные города:
-
-A: 10
-
-E: 2
-
-Город: D
-Связанные города:
-
-F: 7
-
-B: 3
-
-Город: E
-Связанные города:
-
-F: 4
-
-C: 2
-
-B: 8
-
-Город: F
-Связанные города:
-
-E: 4
-
-D: 7
-
-text
-
-<hr>
-
-<h2> Задание 4. Улучшенные сущности</h2>
-
-<h3> Задача 8. Создаем Города</h3>
-
-<p><strong>Улучшенный класс City:</strong></p>
-```java
-public class City {
-    private String name;
-    private Map<City, Integer> routes;
-    
-    /* Новое требование: Город можно создать указав только название */
-    public City(String name) {
-        setName(name);
-        this.routes = new HashMap<>();
-    }
-    
-    /* Новое требование: Город можно создать указав название и набор связанных городов */
-    public City(String name, Map<City, Integer> routes) {
-        setName(name);
-        this.routes = new HashMap<>(routes);
-    }
-    
-    // Валидация названия города
-    public void setName(String name) {
-        if (Validation.isValidCityName(name)) {
-            this.name = name.toUpperCase();
-        } else {
-            System.out.println("Ошибка: название должно быть одной заглавной латинской буквой");
-            this.name = "A";
-        }
-    }
-}
-<p><strong>Проверки ввода:</strong></p> <ul> <li>Название должно быть одной заглавной латинской буквой</li> <li>Название должно быть уникальным среди существующих городов</li> <li>Предотвращение создания пути к самому себе</li> </ul><hr><h2> Задание 5. Функциональность объектов</h2><h3> Задача 5. Дроби</h3><p><strong>Класс Fraction:</strong></p> ```java public class Fraction { private int numerator; // числитель private int denominator; // знаменатель
-text
-public Fraction(int numerator, int denominator) {
-    if (denominator == 0) throw new IllegalArgumentException("Знаменатель не может быть нулем");
-    this.numerator = numerator;
-    this.denominator = denominator;
-    simplify();
-}
-
-// Операции с дробями
-public Fraction add(Fraction other) {
-    int newNum = this.numerator * other.denominator + other.numerator * this.denominator;
-    int newDen = this.denominator * other.denominator;
-    return new Fraction(newNum, newDen);
-}
-
-public Fraction subtract(Fraction other) {
-    int newNum = this.numerator * other.denominator - other.numerator * this.denominator;
-    int newDen = this.denominator * other.denominator;
-    return new Fraction(newNum, newDen);
-}
-
-public Fraction multiply(Fraction other) {
-    return new Fraction(this.numerator * other.numerator, 
-                       this.denominator * other.denominator);
-}
-
-public Fraction divide(Fraction other) {
-    return new Fraction(this.numerator * other.denominator, 
-                       this.denominator * other.numerator);
-}
-
-@Override
-public String toString() {
-    return numerator + "/" + denominator;
-}
-}
-
-text
-
-<p><strong>Примеры операций:</strong></p>
+<h3>Решение</h3>
+<p>Класс <code>Person</code> содержит:</p>
 <ul>
-<li>1/3 + 2/3 = 3/3 = 1/1</li>
-<li>3/4 - 1/2 = 1/4</li>
-<li>1/3 * 2/3 = 2/9</li>
-<li>3/4 / 1/2 = 6/4 = 3/2</li>
+    <li>Приватные поля <code>name</code> (строка) и <code>height</code> (целое число)</li>
+    <li>Конструктор с параметрами имени и роста</li>
+    <li>Геттеры и сеттеры для полей</li>
+    <li>Переопределенный метод <code>toString()</code>, возвращающий строку формата <code>"Имя: name, рост: height см"</code></li>
 </ul>
 
-<p><strong>Сложное выражение:</strong></p>
+<h3>Пример использования</h3>
+<pre><code>Person person1 = new Person("Клеопатра", 152);
+Person person2 = new Person("Пушкин", 167);
+Person person3 = new Person("Владимир", 189);
+System.out.println(person1); // Имя: Клеопатра, рост: 152 см
+System.out.println(person2); // Имя: Пушкин, рост: 167 см
+System.out.println(person3); // Имя: Владимир, рост: 189 см</code></pre>
+
+<h2>Задание 1.3: Имена</h2>
+<h3>Условие</h3>
+<p>Создать сущность <strong>Имя</strong>, которая описывается тремя параметрами: Фамилия, Личное имя, Отчество. Имя может быть приведено к строковому виду, включающему традиционное представление всех трех параметров. Необходимо предусмотреть возможность того, что какой-либо из параметров может быть не задан. Создать следующие имена:</p>
 <ul>
-<li>f1.add(f2).divide(f3).subtract(5) = -4 11/12</li>
+    <li>Клеопатра</li>
+    <li>Пушкин Александр Сергеевич</li>
+    <li>Маяковский Владимир</li>
 </ul>
 
-<hr>
+<h3>Решение</h3>
+<p>Класс <code>Name</code> содержит:</p>
+<ul>
+    <li>Приватные поля <code>lastName</code>, <code>firstName</code>, <code>middleName</code></li>
+    <li>Конструкторы для разных комбинаций параметров</li>
+    <li>Методы проверки наличия компонентов имени</li>
+    <li>Переопределенный метод <code>toString()</code>, который формирует строку только из заданных компонентов</li>
+</ul>
 
-<h2> Главный класс программы</h2>
+<h3>Пример использования</h3>
+<pre><code>Name name1 = new Name("Клеопатра");
+Name name2 = new Name("Пушкин", "Александр", "Сергеевич");
+Name name3 = new Name("Маяковский", "Владимир");
+System.out.println(name1); // Клеопатра
+System.out.println(name2); // Пушкин Александр Сергеевич
+System.out.println(name3); // Маяковский Владимир</code></pre>
 
-<p><strong>Структура меню:</strong></p>
-```java
-public class Main {
-    private static List<Person> people = new ArrayList<>();
-    private static List<Name> names = new ArrayList<>();
-    private static List<City> cities = new ArrayList<>();
-    private static List<Fraction> fractions = new ArrayList<>();
-    
-    public static void main(String[] args) {
-        // Инициализация данных
-        initializeDefaultData();
-        
-        // Основное меню с разделами:
-        // 1. Работа с людьми
-        // 2. Работа с именами  
-        // 3. Работа с городами
-        // 4. Работа с дробями
-        // 5. Выход
-    }
-}
-<p><strong>Особенности реализации:</strong></p> <ul> <li>Дружественный интерфейс с проверкой ввода</li> <li>Возможность интерактивного создания объектов</li> <li>Демонстрация всех требуемых операций</li> <li>Обработка ошибок и валидация данных</li> </ul><hr><h2> Вывод</h2><p>В ходе лабораторной работы успешно реализованы все требуемые сущности согласно варианту 2:</p> <ol> <li>Создана система классов для работы с людьми, именами и наследованием</li> <li>Реализована схема городов с путями между ними</li> <li>Разработан класс для работы с дробями и математическими операциями</li> <li>Обеспечен дружественный интерфейс с проверкой ввода данных</li> <li>Все классы содержат необходимые свойства, конструкторы и метод toString()</li> </ol><p>Программа демонстрирует принципы объектно-ориентированного программирования: инкапсуляцию, наследование, полиморфизм и обеспечивает удобное взаимодействие с пользователем через консольное меню.</p> ```
+<h2>Задание 2.2: Человек с именем</h2>
+<h3>Условие</h3>
+<p>Объединить сущности Человек из задачи 1.2 и Имя из задачи 1.3 таким образом, чтобы имя человека задавалось с использованием сущности Имя, а не строки. Объединить ранее созданные объекты имен и людей.</p>
+
+<h3>Решение</h3>
+<p>Класс <code>Person</code> модифицирован:</p>
+<ul>
+    <li>Поле <code>name</code> теперь типа <code>Name</code> вместо <code>String</code></li>
+    <li>Добавлены новые конструкторы</li>
+    <li>Метод <code>toString()</code> обновлен для работы с объектом Name</li>
+</ul>
+
+<h3>Пример использования</h3>
+<pre><code>Person person1 = new Person(new Name("Клеопатра"), 152);
+Person person2 = new Person(new Name("Пушкин", "Александр", "Сергеевич"), 167);
+Person person3 = new Person(new Name("Маяковский", "Владимир"), 189);</code></pre>
+
+<h2>Задание 2.3: Человек с родителем</h2>
+<h3>Условие</h3>
+<p>Изменить сущность Человек добавив возможность задавать отца. При приведении человека к строковой форме необходимо:</p>
+<ul>
+    <li>Если у человека нет фамилии, а у отца есть - наследовать фамилию</li>
+    <li>Если у человека нет отчества, а у отца есть имя - создать отчество</li>
+</ul>
+
+<h3>Решение</h3>
+<p>Класс <code>Person</code> расширен:</p>
+<ul>
+    <li>Добавлено поле <code>father</code> типа <code>Person</code></li>
+    <li>Добавлен конструктор с отцом</li>
+    <li>Реализован метод <code>inheritFromFather()</code> для автоматического наследования</li>
+</ul>
+
+<h3>Пример использования</h3>
+<pre><code>Person ivan = new Person(new Name("Иван"), 175);
+Person petr = new Person(new Name(null, "Петр"), 180, ivan);
+Person boris = new Person(new Name(null, "Борис"), 185, petr);
+// Петр наследует фамилию "Чудов" от Ивана
+// Борис наследует фамилию "Чудов" и отчество "Петрович" от Петра</code></pre>
+
+<h2>Задание 3.3: Города</h2>
+<h3>Условие</h3>
+<p>Создать сущность <strong>Город</strong>, которая представляет собой точку на карте с названием и набором путей к другим городам с указанием стоимости поездки. Город должен возвращать текстовое представление с названием и списком связанных городов.</p>
+
+<h3>Решение</h3>
+<p>Класс <code>City</code> содержит:</p>
+<ul>
+    <li>Поле <code>name</code> - название города</li>
+    <li>Поле <code>routes</code> - карта путей к другим городам с стоимостью</li>
+    <li>Методы для добавления/удаления путей</li>
+    <li>Метод <code>toString()</code> для текстового представления</li>
+</ul>
+
+<h3>Пример использования</h3>
+<pre><code>City a = new City("A");
+City b = new City("B");
+a.addRoute(b, 5);
+System.out.println(a);
+// Город: A
+// Связанные города:
+//   - B: 5</code></pre>
+
+<h2>Задание 4.8: Создаем Города</h2>
+<h3>Условие</h3>
+<p>Изменить сущность Город так, чтобы:</p>
+<ul>
+    <li>Город можно создать указав только название</li>
+    <li>Город можно создать указав название и набор связанных городов</li>
+</ul>
+
+<h3>Решение</h3>
+<p>Класс <code>City</code> расширен:</p>
+<ul>
+    <li>Добавлена валидация названия города</li>
+    <li>Добавлена проверка уникальности названий</li>
+    <li>Реализованы оба типа конструкторов</li>
+</ul>
+
+<h3>Пример использования</h3>
+<pre><code>// Создание города только с названием
+City city1 = new City("A");
+
+// Создание города с путями
+Map<City, Integer> routes = new HashMap<>();
+routes.put(cityB, 5);
+City city2 = new City("B", routes);</code></pre>
+
+<h2>Задание 5.5: Дроби</h2>
+<h3>Условие</h3>
+<p>Создать сущность <strong>Дробь</strong> с числителем и знаменателем. Дробь должна:</p>
+<ul>
+    <li>Возвращать строковое представление "числитель/знаменатель"</li>
+    <li>Выполнять операции сложения, вычитания, умножения и деления с другими дробями</li>
+    <li>Все операции должны возвращать новые дроби</li>
+</ul>
+
+<h3>Решение</h3>
+<p>Класс <code>Fraction</code> содержит:</p>
+<ul>
+    <li>Поля <code>numerator</code> и <code>denominator</code></li>
+    <li>Конструкторы для создания дробей</li>
+    <li>Методы арифметических операций</li>
+    <li>Метод упрощения дробей</li>
+    <li>Переопределенный метод <code>toString()</code></li>
+</ul>
+
+<h3>Пример использования</h3>
+<pre><code>Fraction f1 = new Fraction(1, 3);
+Fraction f2 = new Fraction(2, 3);
+Fraction sum = f1.add(f2);        // 1/3 + 2/3 = 1/1
+Fraction product = f1.multiply(f2); // 1/3 * 2/3 = 2/9
+
+// Сложное выражение
+Fraction result = f1.add(f2).divide(f3).subtract(5);</code></pre>
+
+<h2>Главный класс программы</h2>
+<h3>Структура</h3>
+<p>Класс <code>Main</code> содержит интерактивное меню для работы со всеми сущностями:</p>
+<ul>
+    <li>Работа с людьми</li>
+    <li>Работа с именами</li>
+    <li>Работа с городами</li>
+    <li>Работа с дробями</li>
+</ul>
+
+<h3>Особенности реализации</h3>
+<ul>
+    <li>Дружественный интерфейс с проверкой ввода</li>
+    <li>Возможность интерактивного создания объектов</li>
+    <li>Демонстрация всех требуемых операций</li>
+    <li>Обработка ошибок и валидация данных</li>
+</ul>
+
+<h3>Пример работы меню</h3>
+<pre><code>ГЛАВНОЕ МЕНЮ
+1. Работа с людьми
+2. Работа с именами
+3. Работа с городами
+4. Работа с дробями
+5. Выход
+Выберите действие: </code></pre>
+
+<h2>Вывод</h2>
+<p>В ходе лабораторной работы успешно реализованы все требуемые сущности согласно варианту 2:</p>
+<ol>
+    <li>Создана система классов для работы с людьми, именами и наследованием</li>
+    <li>Реализована схема городов с путями между ними</li>
+    <li>Разработан класс для работы с дробями и математическими операциями</li>
+    <li>Обеспечен дружественный интерфейс с проверкой ввода данных</li>
+    <li>Все классы содержат необходимые свойства, конструкторы и метод toString()</li>
+</ol>
+
+<p>Программа демонстрирует принципы объектно-ориентированного программирования: инкапсуляцию, наследование, полиморфизм и обеспечивает удобное взаимодействие с пользователем через консольное меню.</p>
+```
